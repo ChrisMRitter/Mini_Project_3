@@ -1,0 +1,23 @@
+.add-form {
+  width: min(720px, 92vw);
+  background: #1f2638;
+  border: 1px solid #2f3a55;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem auto;
+  text-align: left;
+}
+
+.add-form h2 {
+  margin: 0 0 0.75rem 0;
+  color: #f2f5ff;
+}
+
+.add-form input {
+  width: 100%;
+  margin: 0.35rem 0;
+  padding: 0.55rem;
+  border-radius: 6px;
+  border: 1px solid #2f3a55;
+  background: #141a28;
+  color: #f2f5ff;}
