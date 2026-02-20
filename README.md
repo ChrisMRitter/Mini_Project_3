@@ -11,4 +11,4 @@ Simple React app that lets you store and manage account information for differen
 
 ## Details
 - Made by Chris Ritter
-- Live Link: accountmanagr.netlify.app
+- Live Link: [accountmanagr.netlify.app](accountmanagr.netlify.app)
