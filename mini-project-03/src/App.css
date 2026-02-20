@@ -1,13 +1,15 @@
+/* src/App.css */
 .App {
   min-height: 100vh;
 }
 
 .App-header {
   padding: 2rem 1rem;
+  text-align: center;
 }
 
 .subtitle {
-  color: #cfd6ee;
+  color: #555;
   margin-bottom: 1rem;
 }
 
@@ -15,11 +17,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .search-row {
-  width: min(720px, 92vw);
-  margin: 0 auto 1rem auto;
+  width: min(760px, 92vw);
+  margin: 0.75rem auto 0.5rem auto;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -29,16 +32,41 @@
   flex: 1;
   padding: 0.6rem;
   border-radius: 6px;
-  border: 1px solid #2f3a55;
-  background: #141a28;
-  color: #f2f5ff;
+  border: 1px solid #ccc;
 }
 
 .stats {
-  color: #cfd6ee;
   white-space: nowrap;
+  color: #333;
 }
 
 .empty {
-  color: #cfd6ee;
+  color: #555;
+  margin-top: 1rem;
+}
+
+.bottom-panel {
+  width: min(760px, 92vw);
+  margin: 2rem auto 0 auto;
+  text-align: center;
+}
+
+.all-list {
+  text-align: left;
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
 }

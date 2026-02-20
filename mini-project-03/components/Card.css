@@ -1,11 +1,11 @@
 .card {
-  width: 340px;
-  border: 1px solid #2f3a55;
+  width: 360px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   margin: 1rem;
+  background: white;
   overflow: hidden;
-  background: #1f2638;
 }
 
 .card-body {
@@ -13,29 +13,49 @@
   text-align: left;
 }
 
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
 .card-title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #f2f5ff;
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
 }
 
 .card-text {
-  color: #cfd6ee;
-  margin-bottom: 0.75rem;
+  margin: 0;
+  color: #555;
 }
 
-.details {
-  margin-top: 0.75rem;
+.accounts-list {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
   padding-top: 0.75rem;
-  border-top: 1px solid #2f3a55;
-  color: #cfd6ee;
+}
+
+.account-row {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.account-row:last-child {
+  border-bottom: none;
+}
+
+.account-details {
+  margin-top: 0.25rem;
+  color: #444;
+  font-size: 0.95rem;
 }
 
 .btn-row {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 button {
@@ -43,30 +63,23 @@ button {
   cursor: pointer;
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
-  font-weight: 600;
-}
-
-.btn-primary {
-  background-color: #4a6cff;
-  color: white;
+  font-weight: 700;
 }
 
 .btn-secondary {
-  background-color: #2f3a55;
+  background: #6c757d;
   color: white;
 }
 
 .btn-danger {
-  background-color: #d9534f;
+  background: #dc3545;
   color: white;
 }
 
-.form input {
+.edit-block input {
   width: 100%;
   margin: 0.35rem 0;
   padding: 0.55rem;
   border-radius: 6px;
-  border: 1px solid #2f3a55;
-  background: #141a28;
-  color: #f2f5ff;
+  border: 1px solid #ccc;
 }

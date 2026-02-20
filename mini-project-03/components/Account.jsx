@@ -11,22 +11,18 @@ export function Account({ onAdd }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((p) => ({ ...p, [name]: value }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    if (!form.service || !form.accountName) return;
-
     onAdd(form);
-
     setForm({ service: "", accountName: "", username: "", password: "" });
   }
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <h2>Add New Account</h2>
+      <h2>Add Account</h2>
 
       <input
         name="service"

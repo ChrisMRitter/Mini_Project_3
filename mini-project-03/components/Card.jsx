@@ -1,112 +1,124 @@
 import React, { useState } from "react";
 import "./Card.css";
 
-export const Card = ({ account, onDelete, onUpdate }) => {
-  const [showDetails, setShowDetails] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+export const Card = ({ serviceGroup, onDeleteAccount, onUpdateAccount }) => {
+  const [open, setOpen] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const [form, setForm] = useState({
-    service: account.service,
-    accountName: account.accountName,
-    username: account.username,
-    password: account.password,
+    accountName: "",
+    username: "",
+    password: "",
   });
+
+  function startEdit(account) {
+    setEditingId(account.id);
+    setForm({
+      accountName: account.accountName,
+      username: account.username,
+      password: account.password,
+    });
+  }
+
+  function cancelEdit() {
+    setEditingId(null);
+    setForm({ accountName: "", username: "", password: "" });
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((p) => ({ ...p, [name]: value }));
   }
 
-  function handleSave() {
-    onUpdate(account.id, form);
-    setIsEditing(false);
+  function saveEdit() {
+    if (!editingId) return;
+    if (!form.accountName.trim()) return;
+    onUpdateAccount(serviceGroup.id, editingId, {
+      accountName: form.accountName.trim(),
+      username: form.username.trim(),
+      password: form.password.trim(),
+    });
+    cancelEdit();
   }
 
   return (
     <div className="card">
       <div className="card-body">
-        {!isEditing ? (
-          <>
-            <h5 className="card-title">{account.service}</h5>
+        <div className="card-top">
+          <div>
+            <h5 className="card-title">{serviceGroup.service}</h5>
             <p className="card-text">
-              <strong>Account:</strong> {account.accountName}
+              Accounts: <strong>{serviceGroup.accounts.length}</strong>
             </p>
+          </div>
 
-            <div className="btn-row">
-              <button
-                className="btn-primary"
-                onClick={() => setShowDetails((s) => !s)}
-              >
-                {showDetails ? "Hide Details" : "View Details"}
-              </button>
+          <button className="btn-primary" onClick={() => setOpen((v) => !v)}>
+            {open ? "Hide Accounts" : "View Accounts"}
+          </button>
+        </div>
 
-              <button className="btn-secondary" onClick={() => setIsEditing(true)}>
-                Edit
-              </button>
+        {open && (
+          <div className="accounts-list">
+            {serviceGroup.accounts.map((a) => (
+              <div key={a.id} className="account-row">
+                {editingId !== a.id ? (
+                  <>
+                    <div className="account-main">
+                      <div className="account-name">
+                        <strong>{a.accountName}</strong>
+                      </div>
+                      <div className="account-details">
+                        <div>Username: {a.username}</div>
+                        <div>Password: {a.password}</div>
+                      </div>
+                    </div>
 
-              <button className="btn-danger" onClick={() => onDelete(account.id)}>
-                Delete
-              </button>
-            </div>
+                    <div className="btn-row">
+                      <button className="btn-secondary" onClick={() => startEdit(a)}>
+                        Edit
+                      </button>
+                      <button
+                        className="btn-danger"
+                        onClick={() => onDeleteAccount(serviceGroup.id, a.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="edit-block">
+                    <input
+                      name="accountName"
+                      value={form.accountName}
+                      onChange={handleChange}
+                      placeholder="Account Name"
+                    />
+                    <input
+                      name="username"
+                      value={form.username}
+                      onChange={handleChange}
+                      placeholder="Username"
+                    />
+                    <input
+                      name="password"
+                      value={form.password}
+                      onChange={handleChange}
+                      placeholder="Password (demo)"
+                    />
 
-            {showDetails && (
-              <div className="details">
-                <p><strong>Username:</strong> {account.username}</p>
-                <p><strong>Password:</strong> {account.password}</p>
+                    <div className="btn-row">
+                      <button className="btn-primary" onClick={saveEdit}>
+                        Save
+                      </button>
+                      <button className="btn-secondary" onClick={cancelEdit}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </>
-        ) : (
-          <>
-            <h5 className="card-title">Edit {account.service}</h5>
-
-            <div className="form">
-              <input
-                name="service"
-                value={form.service}
-                onChange={handleChange}
-                placeholder="Service (Google, Instagram...)"
-              />
-              <input
-                name="accountName"
-                value={form.accountName}
-                onChange={handleChange}
-                placeholder="Account Name"
-              />
-              <input
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="Username"
-              />
-              <input
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Password (demo)"
-              />
-
-              <div className="btn-row">
-                <button className="btn-primary" onClick={handleSave}>
-                  Save
-                </button>
-                <button
-                  className="btn-secondary"
-                  onClick={() => {
-                    setForm({
-                      service: account.service,
-                      accountName: account.accountName,
-                      username: account.username,
-                      password: account.password,
-                    });
-                    setIsEditing(false);
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </>
+            ))}
+          </div>
         )}
       </div>
     </div>
