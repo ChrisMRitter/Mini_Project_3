@@ -9,30 +9,30 @@ function App() {
       id: 1,
       service: "Google",
       accounts: [
-        {
-          id: 101,
-          accountName: "School",
-          username: "chris.school",
-          password: "demo123",
-        },
+        { id: 101, accountName: "School", username: "c.ritter26@ncf.edu", password: "Yallainthackingme26!!!" },
       ],
     },
     {
       id: 2,
       service: "Instagram",
       accounts: [
-        {
-          id: 201,
-          accountName: "Personal",
-          username: "chris_pics",
-          password: "password-demo",
-        },
+        { id: 201, accountName: "Personal", username: "chrismritter", password: "Stillainthackingmelol42!!1!" },
       ],
     },
   ]);
 
   const [search, setSearch] = useState("");
   const [showAllList, setShowAllList] = useState(false);
+  const [openServiceIds, setOpenServiceIds] = useState(() => new Set());
+
+  function toggleOpen(serviceId) {
+    setOpenServiceIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(serviceId)) next.delete(serviceId);
+      else next.add(serviceId);
+      return next;
+    });
+  }
 
   function addAccount(form) {
     const serviceName = (form.service || "").trim();
@@ -69,14 +69,25 @@ function App() {
   }
 
   function deleteAccount(serviceId, accountId) {
-    setServices((prev) =>
-      prev
+    setServices((prev) => {
+      const next = prev
         .map((s) => {
           if (s.id !== serviceId) return s;
           return { ...s, accounts: s.accounts.filter((a) => a.id !== accountId) };
         })
-        .filter((s) => s.accounts.length > 0)
-    );
+        .filter((s) => s.accounts.length > 0);
+
+      const stillExists = next.some((s) => s.id === serviceId);
+      if (!stillExists) {
+        setOpenServiceIds((prevOpen) => {
+          const n = new Set(prevOpen);
+          n.delete(serviceId);
+          return n;
+        });
+      }
+
+      return next;
+    });
   }
 
   function updateAccount(serviceId, accountId, updatedFields) {
@@ -122,7 +133,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Account Management</h1>
-        <p className="subtitle">Add your acccount info below to store it temporarily.</p>
+        <p className="subtitle">Temporary Storage for your Accounts.</p>
 
         <Account onAdd={addAccount} />
 
@@ -143,6 +154,8 @@ function App() {
             <Card
               key={serviceGroup.id}
               serviceGroup={serviceGroup}
+              isOpen={openServiceIds.has(serviceGroup.id)}
+              onToggleOpen={() => toggleOpen(serviceGroup.id)}
               onDeleteAccount={deleteAccount}
               onUpdateAccount={updateAccount}
             />
@@ -154,23 +167,29 @@ function App() {
         </div>
 
         <div className="bottom-panel">
-          <button
-            className="btn-primary"
-            onClick={() => setShowAllList((v) => !v)}
-          >
+          <button className="btn-primary" onClick={() => setShowAllList((v) => !v)}>
             {showAllList ? "Hide All Accounts (List View)" : "Show All Accounts (List View)"}
           </button>
 
           {showAllList && (
             <div className="all-list">
-              <ul>
+              <ul className="outer-ul">
                 {services.map((s) => (
-                  <li key={s.id}>
-                    <strong>{s.service}</strong>
-                    <ul>
+                  <li key={s.id} className="service-li">
+                    <div className="service-title">{s.service}</div>
+
+                    <ul className="inner-ul">
                       {s.accounts.map((a) => (
-                        <li key={a.id}>
-                          {a.accountName} — {a.username} — {a.password}
+                        <li key={a.id} className="account-li">
+                          <div className="account-title">{a.accountName}</div>
+                          <div className="kv">
+                            <span className="k">username:</span>{" "}
+                            <span className="v">{a.username}</span>
+                          </div>
+                          <div className="kv">
+                            <span className="k">password:</span>{" "}
+                            <span className="v">{a.password}</span>
+                          </div>
                         </li>
                       ))}
                     </ul>

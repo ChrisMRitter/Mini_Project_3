@@ -1,16 +1,17 @@
 .card {
-  width: 360px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  width: 380px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
   margin: 1rem;
-  background: white;
+  background: #111b2e;
   overflow: hidden;
 }
 
 .card-body {
   padding: 1rem;
   text-align: left;
+  color: #e5e7eb;
 }
 
 .card-top {
@@ -27,18 +28,18 @@
 
 .card-text {
   margin: 0;
-  color: #555;
+  color: #cbd5e1;
 }
 
 .accounts-list {
   margin-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #334155;
   padding-top: 0.75rem;
 }
 
 .account-row {
   padding: 0.75rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
 }
 
 .account-row:last-child {
@@ -47,7 +48,7 @@
 
 .account-details {
   margin-top: 0.25rem;
-  color: #444;
+  color: #cbd5e1;
   font-size: 0.95rem;
 }
 
@@ -61,14 +62,18 @@
 button {
   border: none;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0.5rem 0.75rem;
   font-weight: 700;
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: #334155;
   color: white;
+}
+
+.btn-secondary:hover {
+  filter: brightness(1.05);
 }
 
 .btn-danger {
@@ -76,10 +81,20 @@ button {
   color: white;
 }
 
+.btn-danger:hover {
+  filter: brightness(1.05);
+}
+
 .edit-block input {
   width: 100%;
   margin: 0.35rem 0;
-  padding: 0.55rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+.edit-block input::placeholder {
+  color: #94a3b8;
 }

@@ -1,21 +1,37 @@
 .add-form {
-  width: min(760px, 92vw);
+  width: min(820px, 92vw);
   margin: 1rem auto;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #334155;
+  border-radius: 12px;
   padding: 1rem;
-  background: #fafafa;
+  background: #0b1220;
   text-align: left;
+  color: #e5e7eb;
+  box-sizing: border-box;
 }
 
 .add-form h2 {
   margin: 0 0 0.75rem 0;
+  color: #e5e7eb;
 }
 
 .add-form input {
   width: 100%;
+  max-width: 100%;
+  display: block;
+  box-sizing: border-box;
   margin: 0.35rem 0;
-  padding: 0.55rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.add-form input::placeholder {
+  color: #94a3b8;
+}
+
+.add-form button {
+  margin-top: 0.5rem;
 }

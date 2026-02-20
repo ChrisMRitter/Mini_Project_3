@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Card.css";
 
-export const Card = ({ serviceGroup, onDeleteAccount, onUpdateAccount }) => {
-  const [open, setOpen] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+export const Card = ({
+  serviceGroup,
+  isOpen,
+  onToggleOpen,
+  onDeleteAccount,
+  onUpdateAccount,
+}) => {
+  if (!serviceGroup) return null;
 
-  const [form, setForm] = useState({
-    accountName: "",
-    username: "",
-    password: "",
-  });
+  const [editingId, setEditingId] = useState(null);
+  const [form, setForm] = useState({ accountName: "", username: "", password: "" });
 
   function startEdit(account) {
     setEditingId(account.id);
@@ -33,11 +35,13 @@ export const Card = ({ serviceGroup, onDeleteAccount, onUpdateAccount }) => {
   function saveEdit() {
     if (!editingId) return;
     if (!form.accountName.trim()) return;
+
     onUpdateAccount(serviceGroup.id, editingId, {
       accountName: form.accountName.trim(),
       username: form.username.trim(),
       password: form.password.trim(),
     });
+
     cancelEdit();
   }
 
@@ -52,12 +56,12 @@ export const Card = ({ serviceGroup, onDeleteAccount, onUpdateAccount }) => {
             </p>
           </div>
 
-          <button className="btn-primary" onClick={() => setOpen((v) => !v)}>
-            {open ? "Hide Accounts" : "View Accounts"}
+          <button className="btn-primary" onClick={onToggleOpen}>
+            {isOpen ? "Hide Accounts" : "View Accounts"}
           </button>
         </div>
 
-        {open && (
+        {isOpen && (
           <div className="accounts-list">
             {serviceGroup.accounts.map((a) => (
               <div key={a.id} className="account-row">

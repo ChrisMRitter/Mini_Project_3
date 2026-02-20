@@ -46,7 +46,7 @@ export function Account({ onAdd }) {
         name="password"
         value={form.password}
         onChange={handleChange}
-        placeholder="Password (demo)"
+        placeholder="Password"
       />
 
       <button className="btn-primary" type="submit">
